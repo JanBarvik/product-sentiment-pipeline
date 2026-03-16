@@ -1,55 +1,75 @@
 # Product Sentiment Analysis Pipeline
 
-End-to-end data pipeline for scraping product reviews, storing them in a database, and preparing a dataset for sentiment analysis.
+End-to-end data pipeline for scraping product reviews, processing text data, and preparing a dataset for sentiment analysis.
 
 ---
 
-# Project Overview
+## Project Overview
 
-This project demonstrates a complete **data pipeline workflow** built with Python.
+This project demonstrates a complete **data pipeline workflow**:
 
-The pipeline consists of:
+1. Web scraping of product reviews
+2. Storage in a relational database
+3. Text preprocessing using NLP techniques
+4. Preparation of a sentiment-analysis-ready dataset
 
-1. **Web scraping** product reviews from an e-commerce website
-2. **Storing scraped data** in a PostgreSQL database
-3. **Text preprocessing** using Natural Language Processing techniques
-4. Preparing a **clean dataset for sentiment analysis**
-
-The project is implemented using **Python, Selenium, PostgreSQL, and spaCy**.
+The pipeline is implemented using **Python, Selenium, PostgreSQL, and spaCy**.
 
 ---
 
-# Pipeline Architecture
+## Data Source
 
-![Pipeline Architecture](images/pipeline_diagram.png)
-
-This diagram illustrates the end-to-end workflow of the project, from collecting product reviews to preparing a sentiment-analysis-ready dataset.
-
-Pipeline steps:
-
-1. **Web Scraping (Selenium)** – product pages and reviews are collected
-2. **Database Storage (PostgreSQL)** – scraped data is stored in structured tables
-3. **Data Processing (spaCy)** – text preprocessing and cleaning
-4. **Sentiment Dataset** – prepared dataset ready for NLP analysis
+Product reviews were collected from publicly available pages on **Alza.cz** for **educational and demonstration purposes only**.
 
 ---
 
-# Example Workflow
+## Pipeline Architecture
 
-The following steps describe how data flows through the pipeline:
+```
+Scraping (Selenium)
+        ↓
+PostgreSQL Database
+        ↓
+Data Preprocessing (spaCy)
+        ↓
+Sentiment-Ready Dataset
+```
 
-1. The scraping script visits product pages on **Alza.cz**
-2. Product information and customer reviews are extracted
-3. Data is stored in a **PostgreSQL database**
-4. The processing pipeline loads the data into **Pandas**
-5. Reviews are cleaned using **spaCy NLP pipeline**
-6. The final dataset is prepared for **sentiment analysis or machine learning**
+### Pipeline Components
+
+**1. Web Scraping Pipeline**
+
+* Collect product URLs from category pages
+* Extract product metadata
+* Scrape customer reviews
+* Store results in PostgreSQL
+
+Notebook:
+
+```
+scraping_pipeline.ipynb
+```
+
+**2. NLP Processing Pipeline**
+
+* Text normalization
+* Lowercasing
+* Punctuation removal
+* Number removal
+* Lemmatization
+* Creation of cleaned dataset for sentiment analysis
+
+Notebook:
+
+```
+data_processing_pipeline.ipynb
+```
 
 ---
 
-# Example Dataset Output
+## Example Dataset Output
 
-Example rows stored in the dataset:
+Example rows stored in the database:
 
 | product_name         | product_code | review                                    |
 | -------------------- | ------------ | ----------------------------------------- |
@@ -57,11 +77,11 @@ Example rows stored in the dataset:
 | Apple Watch Series 9 | AW12345      | Display is very bright and clear          |
 | Apple Watch Series 9 | AW12345      | Battery could last longer                 |
 
-Each review is stored as a **separate row**, which makes the dataset suitable for NLP tasks.
+Each **review is stored as a separate row**, which makes the dataset suitable for NLP tasks.
 
 ---
 
-# Technologies Used
+## Technologies Used
 
 * Python
 * Selenium
@@ -72,7 +92,7 @@ Each review is stored as a **separate row**, which makes the dataset suitable fo
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```
 product-sentiment-analysis
@@ -83,69 +103,44 @@ product-sentiment-analysis
 ├── scraping_pipeline.ipynb
 ├── data_processing_pipeline.ipynb
 │
-└── images
-    └── pipeline_diagram.png
+└── sample_data
+    └── example_reviews.csv
 ```
 
 ---
 
-# How to Run
+## How to Run
 
-## 1 Install dependencies
+### 1. Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-## 2 Configure PostgreSQL
+### 2. Configure PostgreSQL
 
-Update database credentials inside:
-
-```
-scraping_pipeline.ipynb
-```
-
----
-
-## 3 Run scraping pipeline
-
-Run the notebook:
+Update database credentials in:
 
 ```
 scraping_pipeline.ipynb
 ```
 
-This script:
+### 3. Run scraping pipeline
 
-* collects product pages
-* scrapes customer reviews
-* stores data in PostgreSQL
+```
+scraping_pipeline.ipynb
+```
 
----
-
-## 4 Run NLP processing pipeline
-
-Run:
+### 4. Run NLP processing pipeline
 
 ```
 data_processing_pipeline.ipynb
 ```
 
-This pipeline performs:
-
-* text cleaning
-* punctuation removal
-* number removal
-* lowercasing
-* lemmatization
-
-The result is a **clean dataset ready for sentiment analysis.**
-
 ---
 
-# Notes
+## Notes
 
-This project was created for **educational and demonstration purposes only**.
+This project is intended for **educational and demonstration purposes only**.
 
-The scraped data was collected from publicly available pages on **Alza.cz**.
-Always ensure that web scraping respects website terms of service.
+Web scraping should always respect website terms of service.
